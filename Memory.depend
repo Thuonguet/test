@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1619583046 source:c:\users\admin\desktop\sdl template\memory\main.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<SDL.h>
+	<SDL_image.h>
+

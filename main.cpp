@@ -5,7 +5,7 @@
 
 const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 600;
-const int TILE_SIZE = 150;
+const int TILE_SIZE = 100;
 using namespace std;
 void logSDLError(ostream& os, const string &msg, bool fatal)
 {
@@ -87,13 +87,13 @@ void waitUntilKeyPressed(SDL_Renderer* renderer)
     }
     int mat[10][10];
     int ok[10][10];
-    int n = 4;
+    int n = 6;
     SDL_Event e;
     SDL_Texture *meo= loadTexture("Meo.jpg", renderer);
-    SDL_Texture *bg = loadTexture("bg.png", renderer);
+    SDL_Texture *bg = loadTexture("bg0.jpg", renderer);
     SDL_Texture *win = loadTexture("win.png", renderer);
     SDL_Texture *bg1 = loadTexture("bg1.jpg", renderer);
-    SDL_Texture *start = loadTexture("start.PNG", renderer);
+    SDL_Texture *start = loadTexture("start1.png", renderer);
     renderTexture(bg, renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     renderTexture(start, renderer, 150, 250, 270, 100);
     bool dx[100];
@@ -116,7 +116,7 @@ void waitUntilKeyPressed(SDL_Renderer* renderer)
                     memset(dx, 0, sizeof(dx));
                     srand(time(NULL));
                     r.clear();
-                    while(r.size()<16) {
+                    while(r.size()<36) {
                         int gt = rand()%18+1;
                         if (!dx[gt]) {
                             dx[gt] = 1;
@@ -124,15 +124,15 @@ void waitUntilKeyPressed(SDL_Renderer* renderer)
                             r.push_back(gt);
                         }
                     }
-                    for(int i = 1;i <= 4; i++)
-                        for (int j = 1; j <= 4; j++) {
+                    for(int i = 1;i <= 6; i++)
+                        for (int j = 1; j <= 6; j++) {
                             int gt = rand() % r.size();
                             mat[i][j] = r[gt];
                             swap(r[gt], r[r.size()-1]);
                             r.pop_back();
                         }
-                    for(int i = 1;i <= 4; i++) {
-                        for (int j = 1; j <= 4; j++)
+                    for(int i = 1;i <= 6; i++) {
+                        for (int j = 1; j <= 6; j++)
                             cout << mat[j][i] <<" ";
                         cout << endl;
 
@@ -142,8 +142,8 @@ void waitUntilKeyPressed(SDL_Renderer* renderer)
                         SDL_RenderClear(renderer);
                         renderTexture(bg1, renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
                         int cnt = 0;
-                        for (int i = 1; i <= 4; i++)
-                            for (int j = 1; j <= 4; j++) {
+                        for (int i = 1; i <= 6; i++)
+                            for (int j = 1; j <= 6; j++) {
                                 int x = mat[i][j];
                                 if (ok[i][j] == 0)
                                     renderTexture(meo, renderer, (i-1)*TILE_SIZE, (j-1)*TILE_SIZE, TILE_SIZE, TILE_SIZE);
